@@ -3,129 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แบบประเมินผลการปฏิบัติงาน 15 วัน | Premium</title>
+  <title>Premium Evaluation | ประสบการณ์พนักงานใหม่</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
   <style>
     :root {
-      --primary-color: #1a56db;
-      --primary-hover: #1e40af;
-      --bg-color: #f3f4f6;
-      --card-bg: #ffffff;
-      --text-main: #111827;
-      --text-muted: #6b7280;
-      --border-color: #e5e7eb;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --secondary: #ec4899;
+      --dark: #0f172a;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.5);
     }
     
     body {
       font-family: 'Prompt', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      padding: 20px 0;
+      background-color: #f8fafc;
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+      position: relative;
+      overflow-x: hidden;
     }
 
+    /* Animated Background Orbs */
+    .bg-orb-1 { position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, rgba(255,255,255,0) 70%); z-index: -1; animation: float 15s ease-in-out infinite; }
+    .bg-orb-2 { position: fixed; bottom: -10%; right: -10%; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, rgba(255,255,255,0) 70%); z-index: -1; animation: float 20s ease-in-out infinite reverse; }
+    
+    @keyframes float { 0% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } 100% { transform: translateY(0px) scale(1); } }
+
+    /* Glassmorphism Container */
     .form-container {
+      width: 100%;
       max-width: 850px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      padding: 50px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
       border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+      padding: 50px 60px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+      position: relative;
     }
 
-    .header-title { font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
-    .section-title { font-weight: 600; color: var(--primary-color); font-size: 1.25rem; margin-top: 20px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 2px solid #eff6ff; }
-    .question-label { font-weight: 500; font-size: 1.05rem; color: #374151; margin-bottom: 15px; line-height: 1.5; }
-
-    .progress-wrapper { margin-bottom: 40px; }
-    .step-indicator { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; margin-bottom: 8px; display: flex; justify-content: space-between; }
-    .progress { height: 8px; border-radius: 10px; background-color: #e5e7eb; }
-    .progress-bar { background: linear-gradient(90deg, #3b82f6, #1d4ed8); border-radius: 10px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-
-    .objective-box { background: linear-gradient(145deg, #eff6ff, #dbeafe); border: none; border-left: 6px solid var(--primary-color); padding: 24px; border-radius: 16px; margin-bottom: 40px; }
-    .objective-box h5 { color: var(--primary-hover); font-weight: 700; }
-
-    .form-control, .form-select { border-radius: 12px; border: 1.5px solid var(--border-color); padding: 14px 16px; font-size: 1rem; transition: all 0.3s ease; background-color: #f9fafb; }
-    .form-control:focus, .form-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1); background-color: #ffffff; }
-
-    .btn-outline-custom { border: 1.5px solid var(--border-color); color: var(--text-muted); background-color: #ffffff; border-radius: 12px; padding: 12px 10px; font-weight: 500; transition: all 0.2s ease; font-size: 0.95rem; }
-    .btn-outline-custom:hover { background-color: #f3f4f6; border-color: #d1d5db; }
-    .btn-check:checked + .btn-outline-custom { background-color: #eff6ff; border-color: var(--primary-color); color: var(--primary-color); box-shadow: 0 4px 12px rgba(26, 86, 219, 0.15); font-weight: 600; }
-
-    .btn-next, .btn-submit { background-color: var(--primary-color); color: white; border: none; padding: 14px 32px; border-radius: 12px; font-weight: 600; transition: all 0.3s; }
-    .btn-next:hover, .btn-submit:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26, 86, 219, 0.25); color: white;}
-    .btn-prev { background-color: #ffffff; color: #4b5563; border: 1.5px solid #d1d5db; padding: 14px 32px; border-radius: 12px; font-weight: 600; transition: all 0.3s; }
-    .btn-prev:hover { background-color: #f3f4f6; color: #111827; }
-
-    .form-step { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .form-step.active { display: block; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .header-title { font-weight: 700; background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     
-    .question-error { color: #dc2626; font-size: 0.85rem; margin-top: 8px; display: none; }
+    /* Progress Bar */
+    .progress-container { margin-bottom: 40px; }
+    .progress { height: 10px; border-radius: 10px; background-color: #e2e8f0; overflow: visible; }
+    .progress-bar { background: linear-gradient(90deg, #4f46e5, #ec4899); border-radius: 10px; position: relative; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .progress-bar::after { content: ''; position: absolute; right: -5px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; background: white; border: 3px solid #ec4899; border-radius: 50%; box-shadow: 0 0 10px rgba(236,72,153,0.5); }
+
+    /* Form Steps Transition */
+    .form-step { display: none; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+    .form-step.active { display: block; opacity: 1; transform: translateY(0); animation: fadeInUp 0.6s ease forwards; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Floating Labels (Input) */
+    .form-floating > .form-control, .form-floating > .form-select { border: 2px solid #e2e8f0; border-radius: 12px; background-color: rgba(255,255,255,0.8); transition: all 0.3s; }
+    .form-floating > .form-control:focus, .form-floating > .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); background-color: white; }
+
+    /* Premium Rating Cards */
+    .question-block { margin-bottom: 40px; background: rgba(255,255,255,0.6); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: transform 0.3s; }
+    .question-block:hover { transform: translateY(-2px); box-shadow: 0 10px 15px rgba(0,0,0,0.03); }
+    .question-label { font-weight: 600; font-size: 1.1rem; color: #1e293b; margin-bottom: 20px; line-height: 1.5; }
     
+    .rating-options { display: flex; gap: 12px; width: 100%; flex-wrap: wrap; }
+    .rating-options input[type="radio"] { display: none; }
+    
+    .rating-card {
+      flex: 1; min-width: 120px; text-align: center; padding: 15px 10px; border: 2px solid #e2e8f0; border-radius: 14px; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); background: white; color: #64748b; font-weight: 500; font-size: 0.95rem; user-select: none;
+    }
+    .rating-card .emoji { font-size: 1.8rem; display: block; margin-bottom: 8px; transition: transform 0.3s; filter: grayscale(100%); opacity: 0.7;}
+    
+    .rating-card:hover { border-color: #cbd5e1; background: #f8fafc; }
+    
+    /* Checked States */
+    input[type="radio"]:checked + .rating-card { border-color: var(--primary); background: #eef2ff; color: var(--primary); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.15); transform: translateY(-4px); }
+    input[type="radio"]:checked + .rating-card .emoji { filter: grayscale(0%); opacity: 1; transform: scale(1.2); }
+
+    /* Action Buttons */
+    .btn-action { padding: 14px 35px; border-radius: 30px; font-weight: 600; font-size: 1.05rem; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: 0.5px;}
+    .btn-next, .btn-submit { background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%); color: white; border: none; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); }
+    .btn-next:hover, .btn-submit:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 25px rgba(79, 70, 229, 0.4); color: white;}
+    .btn-prev { background: white; color: #475569; border: 2px solid #e2e8f0; }
+    .btn-prev:hover { background: #f1f5f9; color: var(--dark); border-color: #cbd5e1; }
+
     @media (max-width: 768px) {
-      .form-container { padding: 30px 20px; border-radius: 16px; }
-      .btn-outline-custom { width: 100%; margin-bottom: 5px; }
+      .form-container { padding: 30px 20px; border-radius: 20px; }
+      .rating-card { min-width: 45%; }
+      .rating-card .emoji { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="form-container">
+<div class="bg-orb-1"></div>
+<div class="bg-orb-2"></div>
+
+<div class="form-container animate__animated animate__fadeIn">
+  
+  <div class="text-center mb-5">
+    <h2 class="header-title mb-2">Check-in 15 วันแรก 🚀</h2>
+    <p class="text-muted">ร่วมสร้างประสบการณ์การทำงานที่ดีกว่า ผ่านเสียงของคุณ</p>
+  </div>
+
+  <div class="progress-container">
+    <div class="d-flex justify-content-between mb-2">
+      <span class="text-primary fw-bold" style="font-size: 0.9rem;" id="stepIndicatorText">หมวดที่ 1 จาก 8</span>
+      <span class="text-muted" style="font-size: 0.85rem;"><i class="fa-solid fa-clock me-1"></i>ใช้เวลาประมาณ 3 นาที</span>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" style="width: 12.5%;"></div>
+    </div>
+  </div>
+
+  <form id="evalForm" onsubmit="handleFormSubmit(event)">
     
-    <div class="text-center mb-5">
-      <h2 class="header-title">แบบประเมินผลการปฏิบัติงาน</h2>
-      <p class="text-muted mt-2 fs-5">พนักงานหลังการปฏิบัติงานครบ 15 วัน</p>
-    </div>
-
-    <div class="progress-wrapper">
-      <div class="step-indicator">
-        <span>ความคืบหน้าแบบประเมิน</span>
-        <span id="stepIndicatorText">ส่วนที่ 1 จาก 8</span>
+    <div class="form-step active" id="step-1">
+      <div class="alert bg-primary bg-opacity-10 border-0 rounded-4 p-4 mb-4" role="alert">
+        <h5 class="text-primary fw-bold mb-2"><i class="fa-solid fa-bullseye me-2"></i>ทำไมเราถึงอยากฟังคุณ?</h5>
+        <p class="text-muted mb-0" style="font-size: 0.95rem;">ข้อมูลส่วนนี้จะถูกนำไปวิเคราะห์เพื่อ "อัปเกรด" ระบบการต้อนรับและหลักสูตรฝึกอบรมให้ตอบโจทย์พนักงานใหม่ในอนาคตได้ดียิ่งขึ้น ตอบตามความเป็นจริงได้เลยครับ!</p>
       </div>
-      <div class="progress">
-        <div class="progress-bar" id="progressBar" style="width: 12.5%;"></div>
-      </div>
-    </div>
 
-    <form id="evalForm" onsubmit="handleFormSubmit(event)">
+      <h4 class="fw-bold mb-4 text-dark border-bottom pb-2">ข้อมูลเบื้องต้นของคุณ</h4>
       
-      <div class="form-step active" id="step-1">
-        <div class="objective-box">
-          <h5>🎯 วัตถุประสงค์</h5>
-          <ul class="mb-0 text-dark opacity-75 mt-2">
-            <li class="mb-1">ประเมินผลการปฏิบัติงานและความพร้อมของพนักงานหลังครบ 15 วัน</li>
-            <li>เพื่อใช้ในการปรับปรุงหลักสูตรการฝึกอบรมและแนวทางการเทรน</li>
-          </ul>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" name="fullName" id="fullName" placeholder="ชื่อ-นามสกุล" required>
+            <label for="fullName">ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+          </div>
         </div>
-
-        <h4 class="section-title">ข้อมูลทั่วไป</h4>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <label class="form-label fw-semibold">1. ชื่อ-นามสกุล <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="fullName" placeholder="ระบุชื่อ-นามสกุล" required>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="ชื่อเล่น" required>
+            <label for="nickname">ชื่อเล่น <span class="text-danger">*</span></label>
           </div>
-          <div class="col-md-6">
-            <label class="form-label fw-semibold">2. ชื่อเล่น <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="nickname" placeholder="ระบุชื่อเล่น" required>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" class="form-control" name="startDate" id="startDate" required>
+            <label for="startDate">วันเริ่มงาน <span class="text-danger">*</span></label>
           </div>
-          <div class="col-md-4">
-            <label class="form-label fw-semibold">3. วันเริ่มงาน <span class="text-danger">*</span></label>
-            <input type="date" class="form-control" name="startDate" required>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" class="form-control" name="empId" id="empId" placeholder="รหัสพนักงาน" required>
+            <label for="empId">รหัสพนักงาน <span class="text-danger">*</span></label>
           </div>
-          <div class="col-md-4">
-            <label class="form-label fw-semibold">4. รหัสพนักงาน <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="empId" placeholder="ระบุรหัส" required>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" class="form-control" name="position" id="position" placeholder="ตำแหน่ง" required>
+            <label for="position">ตำแหน่ง <span class="text-danger">*</span></label>
           </div>
-          <div class="col-md-4">
-            <label class="form-label fw-semibold">5. ตำแหน่ง <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="position" placeholder="ระบุตำแหน่ง" required>
-          </div>
-          <div class="col-md-12">
-            <label class="form-label fw-semibold">6. สังกัด / แผนก <span class="text-danger">*</span></label>
+        </div>
+        <div class="col-md-12">
+          <div class="form-floating">
             <select class="form-select" id="deptSelect" onchange="toggleDeptInput()" required>
-              <option value="">-- กรุณาเลือกสังกัด / แผนก --</option>
+              <option value="" disabled selected>-- เลือกสังกัด --</option>
               <option value="BACK OFFICE">BACK OFFICE</option>
               <option value="Telesale PA 1A">Telesale PA 1A</option>
               <option value="Telesale PA 1B">Telesale PA 1B</option>
@@ -142,382 +187,274 @@
               <option value="QC QA & Admin">QC QA & Admin</option>
               <option value="อื่นๆ">อื่นๆ (โปรดระบุ)</option>
             </select>
-            <input type="text" class="form-control mt-3" id="deptOtherInput" style="display:none;" placeholder="โปรดระบุสังกัด / แผนกของคุณ">
-            <input type="hidden" name="department" id="finalDepartment">
+            <label for="deptSelect">สังกัด / แผนก <span class="text-danger">*</span></label>
           </div>
-        </div>
-        <div class="text-end mt-5">
-          <button type="button" class="btn btn-next" onclick="nextStep(1)">ถัดไป &raquo;</button>
+          <input type="text" class="form-control mt-3" id="deptOtherInput" style="display:none;" placeholder="โปรดระบุสังกัด / แผนกของคุณ">
+          <input type="hidden" name="department" id="finalDepartment">
         </div>
       </div>
-
-      <div class="form-step" id="step-2">
-        <h4 class="section-title">A. กระบวนการสรรหา (Recruitment Process)</h4>
-        
-        <div class="mb-5 question-block">
-          <label class="question-label">1. คุณรู้สึกว่ากระบวนการคัดเลือก (ตั้งแต่ต้นจนจบ) มีความราบรื่นและเป็นมืออาชีพเพียงใด <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="recruit_1" id="rec1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec1_1">1 น้อยที่สุด</label>
-            <input type="radio" class="btn-check" name="recruit_1" id="rec1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec1_2">2 น้อย</label>
-            <input type="radio" class="btn-check" name="recruit_1" id="rec1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec1_3">3 มาก</label>
-            <input type="radio" class="btn-check" name="recruit_1" id="rec1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec1_4">4 มากที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">2. ระยะเวลาตั้งแต่การสัมภาษณ์จนถึงการได้รับข้อเสนอ (Offer) มีความเหมาะสมหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="recruit_2" id="rec2_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec2_1">1 ไม่เหมาะสมที่สุด</label>
-            <input type="radio" class="btn-check" name="recruit_2" id="rec2_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec2_2">2 ไม่เหมาะสม</label>
-            <input type="radio" class="btn-check" name="recruit_2" id="rec2_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec2_3">3 เหมาะสม</label>
-            <input type="radio" class="btn-check" name="recruit_2" id="rec2_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec2_4">4 เหมาะสมที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">3. คำอธิบายลักษณะงาน (Job Description) ที่ได้รับก่อนการจ้างมีความชัดเจนและครบถ้วนหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="recruit_3" id="rec3_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec3_1">1 ไม่ชัดเจนที่สุด</label>
-            <input type="radio" class="btn-check" name="recruit_3" id="rec3_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec3_2">2 ไม่ชัดเจน</label>
-            <input type="radio" class="btn-check" name="recruit_3" id="rec3_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec3_3">3 ชัดเจน</label>
-            <input type="radio" class="btn-check" name="recruit_3" id="rec3_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="rec3_4">4 ชัดเจนที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(2)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(2)">ถัดไป &raquo;</button>
-        </div>
+      <div class="text-end mt-5">
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(1)">เริ่มทำประเมิน <i class="fa-solid fa-arrow-right"></i></button>
       </div>
+    </div>
 
-      <div class="form-step" id="step-3">
-        <h4 class="section-title">B. การฝึกอบรม (Training)</h4>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">1. การปฐมนิเทศโดยฝ่ายบุคคล (HR) ให้ข้อมูลที่เป็นประโยชน์และเพียงพอต่อการเริ่มต้นทำงานหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="train_1" id="tr1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr1_1">1 น้อยที่สุด</label>
-            <input type="radio" class="btn-check" name="train_1" id="tr1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr1_2">2 น้อย</label>
-            <input type="radio" class="btn-check" name="train_1" id="tr1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr1_3">3 มาก</label>
-            <input type="radio" class="btn-check" name="train_1" id="tr1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr1_4">4 มากที่สุด</label>
+    <script>
+      function getRatingCards(namePrefix) {
+        return `
+          <div class="rating-options">
+            <input type="radio" name="${namePrefix}" id="${namePrefix}_1" value="1" required>
+            <label class="rating-card" for="${namePrefix}_1"><span class="emoji">😔</span>1 น้อยที่สุด</label>
+            
+            <input type="radio" name="${namePrefix}" id="${namePrefix}_2" value="2">
+            <label class="rating-card" for="${namePrefix}_2"><span class="emoji">😐</span>2 น้อย</label>
+            
+            <input type="radio" name="${namePrefix}" id="${namePrefix}_3" value="3">
+            <label class="rating-card" for="${namePrefix}_3"><span class="emoji">😊</span>3 มาก</label>
+            
+            <input type="radio" name="${namePrefix}" id="${namePrefix}_4" value="4">
+            <label class="rating-card" for="${namePrefix}_4"><span class="emoji">🤩</span>4 มากที่สุด</label>
           </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
+          <div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
+        `;
+      }
+    </script>
 
-        <div class="mb-5">
-          <label class="question-label">2. คุณได้นำความรู้/ทักษะที่ได้รับจากการอบรมมาใช้ในการทำงานในสถานการณ์จริงแล้วหรือไม่ อย่างไร? (โปรดระบุตัวอย่าง) <span class="text-danger">*</span></label>
-          <textarea class="form-control" name="train_2" rows="3" placeholder="ระบุรายละเอียด..." required></textarea>
-        </div>
-
-        <div class="mb-5">
-          <label class="question-label">3. คุณพบอุปสรรคหรือความท้าทายในการนำความรู้/ทักษะจากการอบรมไปใช้ในการทำงานจริงหรือไม่? (ถ้ามี โปรดระบุ) <span class="text-danger">*</span></label>
-          <textarea class="form-control" name="train_3" rows="3" placeholder="ระบุอุปสรรค หรือพิมพ์ 'ไม่มี'" required></textarea>
-        </div>
-
-        <div class="mb-5">
-          <label class="question-label">4. คุณพบว่าเนื้อหา/ทักษะส่วนใดจากการอบรมที่ถูกนำมาใช้มากที่สุดในช่วง 15 วันที่ผ่านมา <span class="text-danger">*</span></label>
-          <textarea class="form-control" name="train_4" rows="3" placeholder="ระบุเนื้อหา/ทักษะ" required></textarea>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">5. การอบรมได้ช่วยให้ท่านปฏิบัติงานได้ดีขึ้น/เร็วขึ้น/มีประสิทธิภาพมากขึ้นตามคาดหวังไหม? <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="train_5" id="tr5_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr5_1">1 ต่ำกว่าคาดหวังมาก</label>
-            <input type="radio" class="btn-check" name="train_5" id="tr5_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr5_2">2 ต่ำกว่าคาดหวัง</label>
-            <input type="radio" class="btn-check" name="train_5" id="tr5_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr5_3">3 ตามคาดหวัง</label>
-            <input type="radio" class="btn-check" name="train_5" id="tr5_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="tr5_4">4 เกินคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5">
-          <label class="question-label">6. ท่านคิดว่าระยะเวลาของการอบรม มีความเหมาะสมกับปริมาณเนื้อหาหรือไม่? <span class="text-danger">*</span></label>
-          <select class="form-select" name="train_6" required>
-            <option value="">-- เลือกความเหมาะสม --</option>
-            <option value="เหมาะสม">เหมาะสม</option>
-            <option value="น้อยเกินไป">น้อยเกินไป</option>
-            <option value="มากเกินไป">มากเกินไป</option>
-          </select>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(3)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(3)">ถัดไป &raquo;</button>
-        </div>
+    <div class="form-step" id="step-2">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part A</span>
+        <h4 class="fw-bold">กระบวนการสรรหา (Recruitment)</h4>
       </div>
-
-      <div class="form-step" id="step-4">
-        <h4 class="section-title">C. การส่งตัวพนักงานและการต้อนรับ</h4>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">1. หน่วยงานมีความพร้อมก่อนการส่งตัวพนักงานที่เป็นประโยชน์มากน้อยเพียงใด <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="dept_1" id="d1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="d1_1">1 น้อยที่สุด</label>
-            <input type="radio" class="btn-check" name="dept_1" id="d1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d1_2">2 น้อย</label>
-            <input type="radio" class="btn-check" name="dept_1" id="d1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d1_3">3 มาก</label>
-            <input type="radio" class="btn-check" name="dept_1" id="d1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d1_4">4 มากที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">2. หัวหน้างานและเพื่อนร่วมงานให้การต้อนรับและช่วยให้ปรับตัวได้ดีตามความคาดหวังไหม? <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="dept_2" id="d2_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="d2_1">1 ต่ำกว่าคาดหวังมาก</label>
-            <input type="radio" class="btn-check" name="dept_2" id="d2_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d2_2">2 ต่ำกว่าคาดหวัง</label>
-            <input type="radio" class="btn-check" name="dept_2" id="d2_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d2_3">3 ตามคาดหวัง</label>
-            <input type="radio" class="btn-check" name="dept_2" id="d2_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d2_4">4 เกินคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">3. บรรยากาศโดยรวม 15 วันแรก เอื้อเฟื้อต่อการเรียนรู้และทำให้รู้สึกเป็นส่วนหนึ่ง <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="dept_3" id="d3_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="d3_1">1 ต่ำกว่าคาดหวังมาก</label>
-            <input type="radio" class="btn-check" name="dept_3" id="d3_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d3_2">2 ต่ำกว่าคาดหวัง</label>
-            <input type="radio" class="btn-check" name="dept_3" id="d3_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d3_3">3 ตามคาดหวัง</label>
-            <input type="radio" class="btn-check" name="dept_3" id="d3_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="d3_4">4 เกินคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(4)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(4)">ถัดไป &raquo;</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step-5">
-        <h4 class="section-title">D. การช่วยเหลือของหัวหน้างาน</h4>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">1. คุณรู้สึกว่าหัวหน้างานของคุณมีความพร้อมและให้การสนับสนุนอย่างสม่ำเสมอหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="boss_1" id="b1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="b1_1">1 น้อยที่สุด</label>
-            <input type="radio" class="btn-check" name="boss_1" id="b1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b1_2">2 น้อย</label>
-            <input type="radio" class="btn-check" name="boss_1" id="b1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b1_3">3 มาก</label>
-            <input type="radio" class="btn-check" name="boss_1" id="b1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b1_4">4 มากที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">2. หัวหน้างานมีความรู้เชี่ยวชาญ และสามารถให้คำแนะนำที่เป็นประโยชน์ได้ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="boss_2" id="b2_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="b2_1">1 ต่ำกว่าคาดหวังมาก</label>
-            <input type="radio" class="btn-check" name="boss_2" id="b2_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b2_2">2 ต่ำกว่าคาดหวัง</label>
-            <input type="radio" class="btn-check" name="boss_2" id="b2_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b2_3">3 ตามคาดหวัง</label>
-            <input type="radio" class="btn-check" name="boss_2" id="b2_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b2_4">4 เกินคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">3. หัวหน้างานรับฟังความคิดเห็นหรือปัญหาของคุณอยู่เสมอ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="boss_3" id="b3_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="b3_1">1 ไม่รับฟัง</label>
-            <input type="radio" class="btn-check" name="boss_3" id="b3_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b3_2">2 ไม่ค่อยรับฟัง</label>
-            <input type="radio" class="btn-check" name="boss_3" id="b3_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b3_3">3 รับฟัง</label>
-            <input type="radio" class="btn-check" name="boss_3" id="b3_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="b3_4">4 รับฟังดีมาก</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(5)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(5)">ถัดไป &raquo;</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step-6">
-        <h4 class="section-title">E. อุปกรณ์ สิ่งอำนวยความสะดวก ความเป็นอยู่</h4>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">1. คุณได้รับเครื่องมือ, อุปกรณ์, หรือบัญชีผู้ใช้งานที่จำเป็นครบถ้วนทันทีหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="tools_1" id="t1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="t1_1">1 ไม่เพียงพอที่สุด</label>
-            <input type="radio" class="btn-check" name="tools_1" id="t1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t1_2">2 ไม่เพียงพอ</label>
-            <input type="radio" class="btn-check" name="tools_1" id="t1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t1_3">3 เพียงพอ</label>
-            <input type="radio" class="btn-check" name="tools_1" id="t1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t1_4">4 เพียงพอที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">2. อุปกรณ์สำนักงานมีความพร้อมและใช้งานได้จริงมากน้อยเพียงใด <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="tools_2" id="t2_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="t2_1">1 ไม่พร้อมที่สุด</label>
-            <input type="radio" class="btn-check" name="tools_2" id="t2_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t2_2">2 ไม่พร้อม</label>
-            <input type="radio" class="btn-check" name="tools_2" id="t2_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t2_3">3 พร้อม</label>
-            <input type="radio" class="btn-check" name="tools_2" id="t2_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t2_4">4 พร้อมที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">3. สิ่งอำนวยความสะดวกภายในที่ทำงานอยู่ในสภาพดีและเพียงพอต่อการใช้งานหรือไม่ <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="tools_3" id="t3_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="t3_1">1 น้อยที่สุด</label>
-            <input type="radio" class="btn-check" name="tools_3" id="t3_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t3_2">2 น้อย</label>
-            <input type="radio" class="btn-check" name="tools_3" id="t3_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t3_3">3 มาก</label>
-            <input type="radio" class="btn-check" name="tools_3" id="t3_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="t3_4">4 มากที่สุด</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(6)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(6)">ถัดไป &raquo;</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step-7">
-        <h4 class="section-title">F. ทัศนคติและค่านิยมหลัก (Power of Four)</h4>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">1. คุณคิดว่าคนส่วนใหญ่ มี Accountability (ความรับผิดชอบ) มากแค่ไหน <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="culture_1" id="c1_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="c1_1">1 น้อยไปมาก</label>
-            <input type="radio" class="btn-check" name="culture_1" id="c1_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c1_2">2 ค่อนข้างน้อย</label>
-            <input type="radio" class="btn-check" name="culture_1" id="c1_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c1_3">3 เหมาะสม</label>
-            <input type="radio" class="btn-check" name="culture_1" id="c1_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c1_4">4 มากกว่าคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">2. คุณคิดว่าพนักงานส่วนใหญ่ของเรามีความมืออาชีพมากแค่ไหน <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="culture_2" id="c2_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="c2_1">1 น้อยไปมาก</label>
-            <input type="radio" class="btn-check" name="culture_2" id="c2_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c2_2">2 ค่อนข้างน้อย</label>
-            <input type="radio" class="btn-check" name="culture_2" id="c2_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c2_3">3 เหมาะสม</label>
-            <input type="radio" class="btn-check" name="culture_2" id="c2_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c2_4">4 มากกว่าคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">3. คุณคิดว่าพนักงานส่วนใหญ่มีความซื่อตรง ยึดมั่นในความถูกต้องมากแค่ไหน <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="culture_3" id="c3_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="c3_1">1 น้อยไปมาก</label>
-            <input type="radio" class="btn-check" name="culture_3" id="c3_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c3_2">2 ค่อนข้างน้อย</label>
-            <input type="radio" class="btn-check" name="culture_3" id="c3_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c3_3">3 เหมาะสม</label>
-            <input type="radio" class="btn-check" name="culture_3" id="c3_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c3_4">4 มากกว่าคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="mb-5 question-block">
-          <label class="question-label">4. คุณคิดว่าพนักงานส่วนใหญ่มีการร่วมแรงร่วมใจเพื่อความสำเร็จของทีมมากน้อยแค่ไหน <span class="text-danger">*</span></label>
-          <div class="d-flex flex-wrap flex-md-nowrap gap-2 w-100">
-            <input type="radio" class="btn-check" name="culture_4" id="c4_1" value="1" required>
-            <label class="btn btn-outline-custom flex-fill text-center" for="c4_1">1 น้อยไปมาก</label>
-            <input type="radio" class="btn-check" name="culture_4" id="c4_2" value="2">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c4_2">2 ค่อนข้างน้อย</label>
-            <input type="radio" class="btn-check" name="culture_4" id="c4_3" value="3">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c4_3">3 เหมาะสม</label>
-            <input type="radio" class="btn-check" name="culture_4" id="c4_4" value="4">
-            <label class="btn btn-outline-custom flex-fill text-center" for="c4_4">4 มากกว่าคาดหวัง</label>
-          </div>
-          <div class="question-error">กรุณาเลือกคำตอบ</div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(7)">&laquo; ย้อนกลับ</button>
-          <button type="button" class="btn btn-next" onclick="nextStep(7)">ถัดไป &raquo;</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step-8">
-        <h4 class="section-title">G. รับฟังอย่างจริงจัง และ เป็นโอกาสในการสร้างอนาคต</h4>
-
-        <div class="mb-5">
-          <label class="question-label">1. คุณมีไอเดียหรือข้อเสนอแนะใดๆ ที่คุณอยากจะแชร์เพื่อปรับปรุงกระบวนการทำงาน/การต้อนรับพนักงานใหม่ให้ดีขึ้นได้อีกบ้างหรือไม่</label>
-          <textarea class="form-control" name="suggestion" rows="6" placeholder="พิมพ์ข้อเสนอแนะของคุณที่นี่..."></textarea>
-        </div>
-
-        <div class="d-flex justify-content-between mt-5">
-          <button type="button" class="btn btn-prev" onclick="prevStep(8)">&laquo; ย้อนกลับ</button>
-          <button type="submit" class="btn btn-submit text-white" id="submitBtn">ส่งแบบประเมิน 🚀</button>
-        </div>
-      </div>
-
-      <div id="statusMessage" class="mt-4 text-center fw-semibold" style="font-size: 1.15rem;"></div>
       
-    </form>
-  </div>
+      <div class="question-block">
+        <label class="question-label">1. คุณรู้สึกว่ากระบวนการคัดเลือก (ตั้งแต่ต้นจนจบ) มีความราบรื่นและเป็นมืออาชีพเพียงใด <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('recruit_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. ระยะเวลาตั้งแต่การสัมภาษณ์จนถึงการได้รับข้อเสนอ (Offer) มีความเหมาะสมหรือไม่ <span class="text-danger">*</span></label>
+        <script>
+          // Custom cards for appropriateness
+          document.write(`
+          <div class="rating-options">
+            <input type="radio" name="recruit_2" id="rec2_1" value="1" required><label class="rating-card" for="rec2_1"><span class="emoji">⏳</span>1 ช้าไปมาก</label>
+            <input type="radio" name="recruit_2" id="rec2_2" value="2"><label class="rating-card" for="rec2_2"><span class="emoji">⏱️</span>2 ค่อนข้างช้า</label>
+            <input type="radio" name="recruit_2" id="rec2_3" value="3"><label class="rating-card" for="rec2_3"><span class="emoji">👍</span>3 เหมาะสม</label>
+            <input type="radio" name="recruit_2" id="rec2_4" value="4"><label class="rating-card" for="rec2_4"><span class="emoji">⚡</span>4 รวดเร็วดีมาก</label>
+          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
+          `);
+        </script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. คำอธิบายลักษณะงาน (Job Description) ที่ได้รับก่อนการจ้างมีความชัดเจนและครบถ้วนหรือไม่ <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('recruit_3').replace(/น้อยที่สุด/g, 'ไม่ชัดเจนสุด').replace(/น้อย/g, 'ไม่ชัดเจน').replace(/มากที่สุด/g, 'ชัดเจนสุด').replace(/มาก/g, 'ชัดเจน'));</script>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(2)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-3">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part B</span>
+        <h4 class="fw-bold">การฝึกอบรม (Training)</h4>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">1. การปฐมนิเทศ (HR) ให้ข้อมูลที่เป็นประโยชน์ต่อการเริ่มต้นทำงานหรือไม่ <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('train_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. คุณได้นำทักษะจากการอบรมมาใช้ในสถานการณ์จริงแล้วหรือไม่ อย่างไร? <span class="text-danger">*</span></label>
+        <textarea class="form-control rounded-4 p-3" name="train_2" rows="2" placeholder="เช่น นำสคริปต์ไปคุยกับลูกค้าจริง..." required></textarea>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. พบอุปสรรคในการนำความรู้ไปใช้ทำงานจริงหรือไม่? <span class="text-danger">*</span></label>
+        <textarea class="form-control rounded-4 p-3" name="train_3" rows="2" placeholder="ระบุอุปสรรค หรือพิมพ์ 'ไม่มี'" required></textarea>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">4. เนื้อหาจากการอบรมส่วนใด ที่ถูกนำมาใช้มากที่สุดใน 15 วันนี้ <span class="text-danger">*</span></label>
+        <textarea class="form-control rounded-4 p-3" name="train_4" rows="2" placeholder="ระบุเนื้อหา..." required></textarea>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">5. การอบรมช่วยให้คุณทำงานได้ดีขึ้นตามคาดหวังไหม? <span class="text-danger">*</span></label>
+        <script>
+          document.write(`
+          <div class="rating-options">
+            <input type="radio" name="train_5" id="tr5_1" value="1" required><label class="rating-card" for="tr5_1"><span class="emoji">📉</span>1 ต่ำกว่าคาดมาก</label>
+            <input type="radio" name="train_5" id="tr5_2" value="2"><label class="rating-card" for="tr5_2"><span class="emoji">😕</span>2 ต่ำกว่าคาด</label>
+            <input type="radio" name="train_5" id="tr5_3" value="3"><label class="rating-card" for="tr5_3"><span class="emoji">🎯</span>3 ตามคาดหวัง</label>
+            <input type="radio" name="train_5" id="tr5_4" value="4"><label class="rating-card" for="tr5_4"><span class="emoji">🚀</span>4 เกินคาดหวัง</label>
+          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
+          `);
+        </script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">6. ระยะเวลาของการอบรม เหมาะสมกับปริมาณเนื้อหาหรือไม่? <span class="text-danger">*</span></label>
+        <select class="form-select rounded-4 p-3" name="train_6" required>
+          <option value="" disabled selected>-- เลือกความเหมาะสม --</option>
+          <option value="เหมาะสม">เหมาะสมดีแล้ว</option>
+          <option value="น้อยเกินไป">น้อยเกินไป (อยากให้อบรมเพิ่ม)</option>
+          <option value="มากเกินไป">มากเกินไป (เนื้อหาแน่นไป)</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(3)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-4">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part C</span>
+        <h4 class="fw-bold">การส่งตัวและการต้อนรับ</h4>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">1. หน่วยงานมีความพร้อมก่อนการส่งตัวพนักงานมากน้อยเพียงใด <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('dept_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. ทีมงานให้การต้อนรับและช่วยให้ปรับตัวได้ดีตามความคาดหวังไหม? <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('dept_2'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. บรรยากาศ 15 วันแรก เอื้อต่อการเรียนรู้และทำให้รู้สึกเป็นส่วนหนึ่ง <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('dept_3'));</script>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(4)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(4)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-5">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part D</span>
+        <h4 class="fw-bold">การสนับสนุนจากหัวหน้างาน</h4>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">1. หัวหน้างานมีความพร้อมและให้การสนับสนุนสม่ำเสมอหรือไม่ <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('boss_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. หัวหน้างานสามารถให้คำแนะนำที่เป็นประโยชน์ได้ดีเพียงใด <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('boss_2'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. หัวหน้างานรับฟังความคิดเห็นหรือปัญหาของคุณอยู่เสมอ <span class="text-danger">*</span></label>
+        <script>
+          document.write(`
+          <div class="rating-options">
+            <input type="radio" name="boss_3" id="b3_1" value="1" required><label class="rating-card" for="b3_1"><span class="emoji">🙉</span>1 ไม่รับฟัง</label>
+            <input type="radio" name="boss_3" id="b3_2" value="2"><label class="rating-card" for="b3_2"><span class="emoji">😕</span>2 ไม่ค่อยฟัง</label>
+            <input type="radio" name="boss_3" id="b3_3" value="3"><label class="rating-card" for="b3_3"><span class="emoji">👂</span>3 รับฟัง</label>
+            <input type="radio" name="boss_3" id="b3_4" value="4"><label class="rating-card" for="b3_4"><span class="emoji">🤝</span>4 รับฟังดีมาก</label>
+          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
+          `);
+        </script>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(5)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(5)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-6">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part E</span>
+        <h4 class="fw-bold">อุปกรณ์และสิ่งอำนวยความสะดวก</h4>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">1. ได้รับอุปกรณ์และบัญชีผู้ใช้งานครบถ้วนทันทีหรือไม่ <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('tools_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. อุปกรณ์สำนักงานมีความพร้อมและใช้งานได้จริงมากน้อยเพียงใด <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('tools_2'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. สิ่งอำนวยความสะดวกในที่ทำงานอยู่ในสภาพดีและเพียงพอหรือไม่ <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('tools_3'));</script>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(6)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(6)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-7">
+      <div class="mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part F</span>
+        <h4 class="fw-bold">วัฒนธรรมองค์กร (Power of Four)</h4>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">1. คุณคิดว่าคนส่วนใหญ่ มีความรับผิดชอบ (Accountability) มากแค่ไหน <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('culture_1'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">2. พนักงานส่วนใหญ่ของเรามีความมืออาชีพมากแค่ไหน <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('culture_2'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">3. พนักงานส่วนใหญ่มีความซื่อตรง ยึดมั่นในความถูกต้องมากแค่ไหน <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('culture_3'));</script>
+      </div>
+
+      <div class="question-block">
+        <label class="question-label">4. การร่วมแรงร่วมใจเพื่อความสำเร็จของทีม มีมากน้อยแค่ไหน <span class="text-danger">*</span></label>
+        <script>document.write(getRatingCards('culture_4'));</script>
+      </div>
+
+      <div class="d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(7)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="button" class="btn btn-action btn-next" onclick="nextStep(7)">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div class="form-step" id="step-8">
+      <div class="text-center mb-5">
+        <div class="display-1 mb-3">💡</div>
+        <h3 class="fw-bold text-primary">ข้อเสนอแนะของคุณมีค่ามาก!</h3>
+        <p class="text-muted">แบ่งปันไอเดียเพื่อให้เราต้อนรับเพื่อนพนักงานคนต่อๆ ไปได้ดียิ่งขึ้น</p>
+      </div>
+
+      <div class="question-block" style="background: white;">
+        <label class="question-label">คุณมีไอเดียหรือข้อเสนอแนะใดๆ เพิ่มเติมหรือไม่?</label>
+        <textarea class="form-control rounded-4 p-4 bg-light border-0" name="suggestion" rows="5" placeholder="พิมพ์ข้อเสนอแนะของคุณที่นี่... (ไม่บังคับ)"></textarea>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mt-5">
+        <button type="button" class="btn btn-action btn-prev" onclick="prevStep(8)"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
+        <button type="submit" class="btn btn-action btn-submit" id="submitBtn">ส่งประเมิน 🚀</button>
+      </div>
+    </div>
+
+    <div id="statusMessage" class="mt-4 text-center" style="font-size: 1.15rem;"></div>
+    
+  </form>
 </div>
 
 <script>
@@ -530,9 +467,11 @@
     const input = document.getElementById('deptOtherInput');
     if (select.value === 'อื่นๆ') {
       input.style.display = 'block';
+      input.classList.add('animate__animated', 'animate__fadeIn');
       input.required = true; 
     } else {
       input.style.display = 'none';
+      input.classList.remove('animate__fadeIn');
       input.required = false;
       input.value = ''; 
     }
@@ -541,17 +480,21 @@
   function validateStep(stepIndex) {
     const stepObj = document.getElementById('step-' + stepIndex);
     let isValid = true;
+    
+    // ตรวจสอบ Text, Date, Select
     const inputs = stepObj.querySelectorAll('input:not([type="radio"]):not([type="hidden"])[required], select[required], textarea[required]');
     inputs.forEach(input => {
       if (input.id === 'deptOtherInput' && input.style.display === 'none') return; 
       if (!input.value.trim()) {
         isValid = false;
-        input.classList.add('border-danger');
+        input.classList.add('border-danger', 'animate__animated', 'animate__headShake');
+        setTimeout(() => input.classList.remove('animate__headShake'), 500);
       } else {
         input.classList.remove('border-danger');
       }
     });
 
+    // ตรวจสอบ Radio Button Cards
     const questionBlocks = stepObj.querySelectorAll('.question-block');
     questionBlocks.forEach(block => {
       const radios = block.querySelectorAll('input[type="radio"][required]');
@@ -562,21 +505,33 @@
         if (!isChecked) {
           isValid = false;
           if(errorMsg) errorMsg.style.display = 'block';
+          block.classList.add('border-danger', 'animate__animated', 'animate__headShake');
+          setTimeout(() => block.classList.remove('animate__headShake'), 500);
         } else {
           if(errorMsg) errorMsg.style.display = 'none';
+          block.classList.remove('border-danger');
         }
       }
     });
-    if (!isValid) window.scrollTo({ top: stepObj.offsetTop - 50, behavior: 'smooth' });
+
+    if (!isValid) {
+      const firstInvalid = stepObj.querySelector('.border-danger');
+      if (firstInvalid) {
+        const topOffset = firstInvalid.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: topOffset, behavior: 'smooth' });
+      }
+    }
     return isValid;
   }
 
+  // Clear Error when clicking Radio
   document.addEventListener('change', function(e) {
     if(e.target.type === 'radio') {
       const block = e.target.closest('.question-block');
       if(block) {
         const errorMsg = block.querySelector('.question-error');
         if(errorMsg) errorMsg.style.display = 'none';
+        block.classList.remove('border-danger');
       }
     }
   });
@@ -587,7 +542,7 @@
     currentStep++;
     document.getElementById('step-' + currentStep).classList.add('active');
     updateProgress();
-    window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 30, behavior: 'smooth' });
+    window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 20, behavior: 'smooth' });
   }
 
   function prevStep(step) {
@@ -595,13 +550,13 @@
     currentStep--;
     document.getElementById('step-' + currentStep).classList.add('active');
     updateProgress();
-    window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 30, behavior: 'smooth' });
+    window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 20, behavior: 'smooth' });
   }
 
   function updateProgress() {
     const progressPercent = (currentStep / totalSteps) * 100;
     document.getElementById('progressBar').style.width = progressPercent + '%';
-    document.getElementById('stepIndicatorText').innerText = `ส่วนที่ ${currentStep} จาก ${totalSteps}`;
+    document.getElementById('stepIndicatorText').innerText = `หมวดที่ ${currentStep} จาก ${totalSteps}`;
   }
 
   function handleFormSubmit(event) {
@@ -613,18 +568,15 @@
 
     const btn = document.getElementById('submitBtn');
     const statusDiv = document.getElementById('statusMessage');
-    const prevBtn = document.querySelector('#step-8 .btn-prev');
     
     btn.disabled = true;
-    prevBtn.disabled = true;
-    btn.innerHTML = 'กำลังบันทึกข้อมูล... ⏳';
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> กำลังส่งข้อมูล...';
     statusDiv.innerHTML = '';
 
     const form = document.getElementById('evalForm');
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData.entries());
 
-    // ใช้ Fetch API เพื่อส่งไปยัง Google Apps Script
     fetch(API_URL, {
       method: 'POST',
       body: JSON.stringify(formObject)
@@ -632,29 +584,28 @@
     .then(response => response.json())
     .then(data => {
       if(data.status === 'success') {
-        form.reset();
-        document.getElementById('step-8').classList.remove('active');
-        currentStep = 1;
-        document.getElementById('step-1').classList.add('active');
-        updateProgress();
-        document.getElementById('deptOtherInput').style.display = 'none'; 
-        statusDiv.innerHTML = '<span style="color: #059669; background: #d1fae5; padding: 15px 25px; border-radius: 12px; display: inline-block;">🎉 บันทึกข้อมูลเรียบร้อย ขอบคุณสำหรับความร่วมมือครับ!</span>';
+        form.style.display = 'none'; // ซ่อนฟอร์มไปเลยเมื่อเสร็จ
+        statusDiv.innerHTML = `
+          <div class="animate__animated animate__zoomIn">
+            <div class="display-1 text-success mb-3">🎉</div>
+            <h3 class="fw-bold text-dark">บันทึกข้อมูลเรียบร้อย!</h3>
+            <p class="text-muted mt-2">ขอบคุณที่ร่วมเป็นส่วนหนึ่งในการพัฒนาองค์กรของเรา</p>
+            <button class="btn btn-outline-primary mt-3 rounded-pill px-4" onclick="location.reload()">ทำประเมินอีกครั้ง</button>
+          </div>
+        `;
       } else {
-        statusDiv.innerHTML = '<span class="text-danger">เกิดข้อผิดพลาด: ' + (data.message || 'ระบบขัดข้อง') + '</span>';
+        statusDiv.innerHTML = '<div class="alert alert-danger rounded-4">เกิดข้อผิดพลาด: ' + (data.message || 'ระบบขัดข้อง') + '</div>';
+        btn.disabled = false;
+        btn.innerHTML = 'ส่งประเมิน 🚀';
       }
-      btn.disabled = false;
-      prevBtn.disabled = false;
-      btn.innerHTML = 'ส่งแบบประเมิน 🚀';
     })
     .catch(error => {
-      statusDiv.innerHTML = '<span class="text-danger">การเชื่อมต่อล้มเหลว กรุณาลองใหม่อีกครั้ง</span>';
+      statusDiv.innerHTML = '<div class="alert alert-danger rounded-4">การเชื่อมต่อล้มเหลว กรุณาลองใหม่อีกครั้ง</div>';
       btn.disabled = false;
-      prevBtn.disabled = false;
-      btn.innerHTML = 'ส่งแบบประเมิน 🚀';
+      btn.innerHTML = 'ส่งประเมิน 🚀';
     });
   }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
