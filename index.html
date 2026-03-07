@@ -97,6 +97,8 @@
     .btn-prev { background: white; color: #475569; border: 2px solid #e2e8f0; }
     .btn-prev:hover { background: #f1f5f9; color: var(--dark); border-color: #cbd5e1; }
 
+    .question-error { display: none; color: #dc2626; font-size: 0.85rem; margin-top: 10px; font-weight: 500; }
+
     @media (max-width: 768px) {
       .form-container { padding: 30px 20px; border-radius: 20px; }
       .rating-card { min-width: 45%; }
@@ -198,27 +200,6 @@
       </div>
     </div>
 
-    <script>
-      function getRatingCards(namePrefix) {
-        return `
-          <div class="rating-options">
-            <input type="radio" name="${namePrefix}" id="${namePrefix}_1" value="1" required>
-            <label class="rating-card" for="${namePrefix}_1"><span class="emoji">😔</span>1 น้อยที่สุด</label>
-            
-            <input type="radio" name="${namePrefix}" id="${namePrefix}_2" value="2">
-            <label class="rating-card" for="${namePrefix}_2"><span class="emoji">😐</span>2 น้อย</label>
-            
-            <input type="radio" name="${namePrefix}" id="${namePrefix}_3" value="3">
-            <label class="rating-card" for="${namePrefix}_3"><span class="emoji">😊</span>3 มาก</label>
-            
-            <input type="radio" name="${namePrefix}" id="${namePrefix}_4" value="4">
-            <label class="rating-card" for="${namePrefix}_4"><span class="emoji">🤩</span>4 มากที่สุด</label>
-          </div>
-          <div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
-        `;
-      }
-    </script>
-
     <div class="form-step" id="step-2">
       <div class="mb-4">
         <span class="badge bg-primary mb-2 px-3 py-2 rounded-pill">Part A</span>
@@ -227,27 +208,17 @@
       
       <div class="question-block">
         <label class="question-label">1. คุณรู้สึกว่ากระบวนการคัดเลือก (ตั้งแต่ต้นจนจบ) มีความราบรื่นและเป็นมืออาชีพเพียงใด <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('recruit_1'));</script>
+        <div id="render_recruit_1"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">2. ระยะเวลาตั้งแต่การสัมภาษณ์จนถึงการได้รับข้อเสนอ (Offer) มีความเหมาะสมหรือไม่ <span class="text-danger">*</span></label>
-        <script>
-          // Custom cards for appropriateness
-          document.write(`
-          <div class="rating-options">
-            <input type="radio" name="recruit_2" id="rec2_1" value="1" required><label class="rating-card" for="rec2_1"><span class="emoji">⏳</span>1 ช้าไปมาก</label>
-            <input type="radio" name="recruit_2" id="rec2_2" value="2"><label class="rating-card" for="rec2_2"><span class="emoji">⏱️</span>2 ค่อนข้างช้า</label>
-            <input type="radio" name="recruit_2" id="rec2_3" value="3"><label class="rating-card" for="rec2_3"><span class="emoji">👍</span>3 เหมาะสม</label>
-            <input type="radio" name="recruit_2" id="rec2_4" value="4"><label class="rating-card" for="rec2_4"><span class="emoji">⚡</span>4 รวดเร็วดีมาก</label>
-          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
-          `);
-        </script>
+        <div id="render_recruit_2"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">3. คำอธิบายลักษณะงาน (Job Description) ที่ได้รับก่อนการจ้างมีความชัดเจนและครบถ้วนหรือไม่ <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('recruit_3').replace(/น้อยที่สุด/g, 'ไม่ชัดเจนสุด').replace(/น้อย/g, 'ไม่ชัดเจน').replace(/มากที่สุด/g, 'ชัดเจนสุด').replace(/มาก/g, 'ชัดเจน'));</script>
+        <div id="render_recruit_3"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-5">
@@ -264,7 +235,7 @@
 
       <div class="question-block">
         <label class="question-label">1. การปฐมนิเทศ (HR) ให้ข้อมูลที่เป็นประโยชน์ต่อการเริ่มต้นทำงานหรือไม่ <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('train_1'));</script>
+        <div id="render_train_1"></div>
       </div>
 
       <div class="question-block">
@@ -284,16 +255,7 @@
 
       <div class="question-block">
         <label class="question-label">5. การอบรมช่วยให้คุณทำงานได้ดีขึ้นตามคาดหวังไหม? <span class="text-danger">*</span></label>
-        <script>
-          document.write(`
-          <div class="rating-options">
-            <input type="radio" name="train_5" id="tr5_1" value="1" required><label class="rating-card" for="tr5_1"><span class="emoji">📉</span>1 ต่ำกว่าคาดมาก</label>
-            <input type="radio" name="train_5" id="tr5_2" value="2"><label class="rating-card" for="tr5_2"><span class="emoji">😕</span>2 ต่ำกว่าคาด</label>
-            <input type="radio" name="train_5" id="tr5_3" value="3"><label class="rating-card" for="tr5_3"><span class="emoji">🎯</span>3 ตามคาดหวัง</label>
-            <input type="radio" name="train_5" id="tr5_4" value="4"><label class="rating-card" for="tr5_4"><span class="emoji">🚀</span>4 เกินคาดหวัง</label>
-          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
-          `);
-        </script>
+        <div id="render_train_5"></div>
       </div>
 
       <div class="question-block">
@@ -320,17 +282,17 @@
 
       <div class="question-block">
         <label class="question-label">1. หน่วยงานมีความพร้อมก่อนการส่งตัวพนักงานมากน้อยเพียงใด <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('dept_1'));</script>
+        <div id="render_dept_1"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">2. ทีมงานให้การต้อนรับและช่วยให้ปรับตัวได้ดีตามความคาดหวังไหม? <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('dept_2'));</script>
+        <div id="render_dept_2"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">3. บรรยากาศ 15 วันแรก เอื้อต่อการเรียนรู้และทำให้รู้สึกเป็นส่วนหนึ่ง <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('dept_3'));</script>
+        <div id="render_dept_3"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-5">
@@ -347,26 +309,17 @@
 
       <div class="question-block">
         <label class="question-label">1. หัวหน้างานมีความพร้อมและให้การสนับสนุนสม่ำเสมอหรือไม่ <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('boss_1'));</script>
+        <div id="render_boss_1"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">2. หัวหน้างานสามารถให้คำแนะนำที่เป็นประโยชน์ได้ดีเพียงใด <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('boss_2'));</script>
+        <div id="render_boss_2"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">3. หัวหน้างานรับฟังความคิดเห็นหรือปัญหาของคุณอยู่เสมอ <span class="text-danger">*</span></label>
-        <script>
-          document.write(`
-          <div class="rating-options">
-            <input type="radio" name="boss_3" id="b3_1" value="1" required><label class="rating-card" for="b3_1"><span class="emoji">🙉</span>1 ไม่รับฟัง</label>
-            <input type="radio" name="boss_3" id="b3_2" value="2"><label class="rating-card" for="b3_2"><span class="emoji">😕</span>2 ไม่ค่อยฟัง</label>
-            <input type="radio" name="boss_3" id="b3_3" value="3"><label class="rating-card" for="b3_3"><span class="emoji">👂</span>3 รับฟัง</label>
-            <input type="radio" name="boss_3" id="b3_4" value="4"><label class="rating-card" for="b3_4"><span class="emoji">🤝</span>4 รับฟังดีมาก</label>
-          </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
-          `);
-        </script>
+        <div id="render_boss_3"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-5">
@@ -383,17 +336,17 @@
 
       <div class="question-block">
         <label class="question-label">1. ได้รับอุปกรณ์และบัญชีผู้ใช้งานครบถ้วนทันทีหรือไม่ <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('tools_1'));</script>
+        <div id="render_tools_1"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">2. อุปกรณ์สำนักงานมีความพร้อมและใช้งานได้จริงมากน้อยเพียงใด <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('tools_2'));</script>
+        <div id="render_tools_2"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">3. สิ่งอำนวยความสะดวกในที่ทำงานอยู่ในสภาพดีและเพียงพอหรือไม่ <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('tools_3'));</script>
+        <div id="render_tools_3"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-5">
@@ -410,22 +363,22 @@
 
       <div class="question-block">
         <label class="question-label">1. คุณคิดว่าคนส่วนใหญ่ มีความรับผิดชอบ (Accountability) มากแค่ไหน <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('culture_1'));</script>
+        <div id="render_culture_1"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">2. พนักงานส่วนใหญ่ของเรามีความมืออาชีพมากแค่ไหน <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('culture_2'));</script>
+        <div id="render_culture_2"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">3. พนักงานส่วนใหญ่มีความซื่อตรง ยึดมั่นในความถูกต้องมากแค่ไหน <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('culture_3'));</script>
+        <div id="render_culture_3"></div>
       </div>
 
       <div class="question-block">
         <label class="question-label">4. การร่วมแรงร่วมใจเพื่อความสำเร็จของทีม มีมากน้อยแค่ไหน <span class="text-danger">*</span></label>
-        <script>document.write(getRatingCards('culture_4'));</script>
+        <div id="render_culture_4"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-5">
@@ -458,6 +411,70 @@
 </div>
 
 <script>
+  // --- โค้ดส่วนอัปเกรด: ฝัง HTML Rating Cards ลงใน DOM ตอนหน้าเว็บโหลดเสร็จ ---
+  function getRatingCards(namePrefix) {
+    return `
+      <div class="rating-options">
+        <input type="radio" name="${namePrefix}" id="${namePrefix}_1" value="1" required>
+        <label class="rating-card" for="${namePrefix}_1"><span class="emoji">😔</span>1 น้อยที่สุด</label>
+        <input type="radio" name="${namePrefix}" id="${namePrefix}_2" value="2">
+        <label class="rating-card" for="${namePrefix}_2"><span class="emoji">😐</span>2 น้อย</label>
+        <input type="radio" name="${namePrefix}" id="${namePrefix}_3" value="3">
+        <label class="rating-card" for="${namePrefix}_3"><span class="emoji">😊</span>3 มาก</label>
+        <input type="radio" name="${namePrefix}" id="${namePrefix}_4" value="4">
+        <label class="rating-card" for="${namePrefix}_4"><span class="emoji">🤩</span>4 มากที่สุด</label>
+      </div>
+      <div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>
+    `;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const render = (id, html) => { document.getElementById(id).innerHTML = html; };
+
+    render('render_recruit_1', getRatingCards('recruit_1'));
+    render('render_recruit_2', `
+      <div class="rating-options">
+        <input type="radio" name="recruit_2" id="rec2_1" value="1" required><label class="rating-card" for="rec2_1"><span class="emoji">⏳</span>1 ช้าไปมาก</label>
+        <input type="radio" name="recruit_2" id="rec2_2" value="2"><label class="rating-card" for="rec2_2"><span class="emoji">⏱️</span>2 ค่อนข้างช้า</label>
+        <input type="radio" name="recruit_2" id="rec2_3" value="3"><label class="rating-card" for="rec2_3"><span class="emoji">👍</span>3 เหมาะสม</label>
+        <input type="radio" name="recruit_2" id="rec2_4" value="4"><label class="rating-card" for="rec2_4"><span class="emoji">⚡</span>4 รวดเร็วดีมาก</label>
+      </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>`);
+    render('render_recruit_3', getRatingCards('recruit_3').replace(/น้อยที่สุด/g, 'ไม่ชัดเจนสุด').replace(/น้อย/g, 'ไม่ชัดเจน').replace(/มากที่สุด/g, 'ชัดเจนสุด').replace(/มาก/g, 'ชัดเจน'));
+
+    render('render_train_1', getRatingCards('train_1'));
+    render('render_train_5', `
+      <div class="rating-options">
+        <input type="radio" name="train_5" id="tr5_1" value="1" required><label class="rating-card" for="tr5_1"><span class="emoji">📉</span>1 ต่ำกว่าคาดมาก</label>
+        <input type="radio" name="train_5" id="tr5_2" value="2"><label class="rating-card" for="tr5_2"><span class="emoji">😕</span>2 ต่ำกว่าคาด</label>
+        <input type="radio" name="train_5" id="tr5_3" value="3"><label class="rating-card" for="tr5_3"><span class="emoji">🎯</span>3 ตามคาดหวัง</label>
+        <input type="radio" name="train_5" id="tr5_4" value="4"><label class="rating-card" for="tr5_4"><span class="emoji">🚀</span>4 เกินคาดหวัง</label>
+      </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>`);
+
+    render('render_dept_1', getRatingCards('dept_1'));
+    render('render_dept_2', getRatingCards('dept_2'));
+    render('render_dept_3', getRatingCards('dept_3'));
+
+    render('render_boss_1', getRatingCards('boss_1'));
+    render('render_boss_2', getRatingCards('boss_2'));
+    render('render_boss_3', `
+      <div class="rating-options">
+        <input type="radio" name="boss_3" id="b3_1" value="1" required><label class="rating-card" for="b3_1"><span class="emoji">🙉</span>1 ไม่รับฟัง</label>
+        <input type="radio" name="boss_3" id="b3_2" value="2"><label class="rating-card" for="b3_2"><span class="emoji">😕</span>2 ไม่ค่อยฟัง</label>
+        <input type="radio" name="boss_3" id="b3_3" value="3"><label class="rating-card" for="b3_3"><span class="emoji">👂</span>3 รับฟัง</label>
+        <input type="radio" name="boss_3" id="b3_4" value="4"><label class="rating-card" for="b3_4"><span class="emoji">🤝</span>4 รับฟังดีมาก</label>
+      </div><div class="question-error"><i class="fa-solid fa-circle-exclamation me-1"></i>กรุณาเลือกคำตอบ</div>`);
+
+    render('render_tools_1', getRatingCards('tools_1'));
+    render('render_tools_2', getRatingCards('tools_2'));
+    render('render_tools_3', getRatingCards('tools_3'));
+
+    render('render_culture_1', getRatingCards('culture_1'));
+    render('render_culture_2', getRatingCards('culture_2'));
+    render('render_culture_3', getRatingCards('culture_3'));
+    render('render_culture_4', getRatingCards('culture_4'));
+  });
+
+  // --- สคริปต์หลักเดิมของคุณ (ไม่เปลี่ยนชื่อตัวแปรหรือฟังก์ชันเลย) ---
   let currentStep = 1;
   const totalSteps = 8;
   const API_URL = "https://script.google.com/macros/s/AKfycby534_5R3iyVWKjdl87heMf5B33W-up9G2KvuSS2HtHxPi2_TVHd9xddYSnw7LtjL8s/exec";
